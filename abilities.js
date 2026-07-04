@@ -256,14 +256,33 @@ var ability_dict = {
 		},
 		weight: (card, ai) => ai.weightWeatherFromDeck(card, "fog")
 	},
-	foltest_lord: {
+		foltest_lord: {
 		description: "Clear any weather effects (resulting from Biting Frost, Torrential Rain or Impenetrable Fog cards) in play.",
 		activated: async () => {
+			
+			let cineOverlay = document.createElement("div");
+			cineOverlay.className = "sunlight-overlay-cinema";
+
+			let solarBeam = document.createElement("div");
+			solarBeam.className = "sunlight-beam-wave";
+
+			
+			cineOverlay.appendChild(solarBeam);
+			document.body.appendChild(cineOverlay);
+
+			
+			setTimeout(() => {
+				if (cineOverlay) cineOverlay.remove();
+			}, 2000);
+
+		
 			tocar("clear", false);
+			await sleep(500);
 			await weather.clearWeather()
 		},
 		weight: (card, ai) =>  ai.weightCard( card_dict["spe_clear"] )
 	},
+
   henselt_vanquisher: {
 		description: "Doubles the strength of all your Siege units (unless a Commander's Horn is also present on that row).",
 		activated: async card => await board.getRow(card, "siege", card.holder).leaderHorn(card),
@@ -364,6 +383,14 @@ var ability_dict = {
 		activated: async (card) => {
 			let hand = board.getRow(card, "hand", card.holder);
 			let deck = board.getRow(card, "deck", card.holder);
+if (!(card.holder.controller instanceof ControllerAI)) {
+				if (!hand || hand.cards.length < 2) {
+					tocar("menu_buy", false); 
+					ui.enablePlayer(true);    
+					return;                   
+				}
+			}
+
 			if (card.holder.controller instanceof ControllerAI) {
 				let cards = card.holder.controller.discardOrder(card).splice(0, 2).filter(c => c.basePower < 7);
 				await Promise.all(cards.map(async c => await board.toGrave(c, card.holder.hand)));
@@ -550,11 +577,20 @@ var ability_dict = {
 			return 15;
 		}
 	},
-	radovid_stern: {
+		radovid_stern: {
 		description: "Discard 2 cards and draw 1 card of your choice from your deck.",
 		activated: async (card) => {
 			let hand = board.getRow(card, "hand", card.holder);
 			let deck = board.getRow(card, "deck", card.holder);
+			
+			if (!(card.holder.controller instanceof ControllerAI)) {
+				if (!hand || hand.cards.length < 2) {
+					tocar("menu_buy", false); 
+					ui.enablePlayer(true);    
+					return;                 
+				}
+			}
+
 			if (card.holder.controller instanceof ControllerAI) {
 				let cards = card.holder.controller.discardOrder(card).splice(0, 2).filter(c => c.basePower < 7);
 				await Promise.all(cards.map(async c => await board.toGrave(c, card.holder.hand)));
@@ -779,6 +815,21 @@ var ability_dict = {
 	vilgefortz_sorcerer: {
 		description: "Clear all weather effects in play.",
 		activated: async () => {
+let cineOverlay = document.createElement("div");
+			cineOverlay.className = "sunlight-overlay-cinema";
+
+			let solarBeam = document.createElement("div");
+			solarBeam.className = "sunlight-beam-wave";
+
+			
+			cineOverlay.appendChild(solarBeam);
+			document.body.appendChild(cineOverlay);
+
+			
+			setTimeout(() => {
+				if (cineOverlay) cineOverlay.remove();
+			}, 2000);
+
 			tocar("clear", false);
 			await weather.clearWeather()
 		},
