@@ -131,8 +131,8 @@ html {
 	height: 3vw;
 	font-size: 3vw;
 	color: #FFB800;
- -webkit-text-stroke: 0.6px black;
-	text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+ -webkit-text-stroke: 0.1px black;
+	text-shadow: 2px 2px 5px #4c390a;
 	z-index: 86;
 }
 
@@ -407,6 +407,7 @@ html {
 	pointer-events: none;
 	border: .1vw solid #ffffff57;
 	border-width: .1vw 0;
+border-radius: 0.5vw;
 }
 
 .card-description>* {
@@ -1268,7 +1269,7 @@ html {
 	position: absolute;
 	font-size: 1.14vw;
 	color: #ab977c;
-	top: 9.45%;
+	top: 9.1%;
 	left: 20.2%;
 	width: 60%;
 	text-align: center;
@@ -1412,7 +1413,7 @@ html {
 	justify-content: center;
 	text-align: center;
 	position: absolute;
-	top: 83%;
+	top: 82%;
 	left: 0%;
 	width: 98%;
 	height: 5vw;
@@ -1544,7 +1545,7 @@ html {
 	left: 0%;
 	width: 96%;
 	height: 5vw;
-	font-size: 0.9vw;
+	font-size: 0.8vw;
 	background-position: left;
 	background-repeat: no-repeat;
 	background-size: contain;

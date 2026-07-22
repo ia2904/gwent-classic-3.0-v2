@@ -6,12 +6,29 @@
 		<meta name = "author" content = "Arun Sundaram, Reynolds Costa, & Iván Mtz"/>
             	<meta name = "description" content = "Play the original Gwent minigame from The Witcher 3 in your browser! Includes cards from Hearts of Stone and Blood & Wine!" />
 		<meta name = "keywords" content = "arun, sundaram, reynolds, costa, randompianist, programmer, gwent, tw3, witcher, card, game, gamedev, play" />
-		<meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<link rel = "icon" type = "image/x-icon" href = "img/favicon.ico" />
 		<link rel = "stylesheet" type = "text/css" href = "style.css" />
-	<style>
+<script type="text/javascript">
+    (function() {
+        if (window.PhoneGap || window.cordova || navigator.userAgent.indexOf('Android') > -1) {
+            document.addEventListener('deviceready', function() {
+                if (navigator.app && navigator.app.overrideButton) {
+                    navigator.app.overrideButton("volumeup", true);
+                }
+            }, false);
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+            let chasisEstilo = document.createElement('style');
+            chasisEstilo.innerHTML = '* { -webkit-text-size-adjust: none !important; text-size-adjust: none !important; }';
+            document.head.appendChild(chasisEstilo);
+        });
+    })();
+</script>	
+<style>
         @font-face {
             font-family: 'GwentCustom';
-            /* Ruta exacta respetando las mayúsculas de tu archivo */
+            
             src: url('fonts/gwent.ttf') format('truetype'); 
             font-weight: normal;
             font-style: normal;
@@ -54,6 +71,8 @@
             <br />
             <font id = "load_text">Loading 3.0 v2...</font>
 				<button class = "start-game_class" id = "button_start" style = "display:none">LET'S PLAY</button>
+<div id = "version_text" style = "font-family: 'GwentCustom', serif; font-size: 1.2rem; color: #d9d9d9; text-align: center; margin-top: 10px;">v3.0.2</div>
+
 			</div>
 		</div>
 		<div id = "dimensions" style = "position:fixed;width:100vw;height:calc(100vw * 1080 / 1920);"></div>
@@ -368,6 +387,18 @@
     
     window.addEventListener('click', iniciarMusicaYa);
     window.addEventListener('touchstart', iniciarMusicaYa);
+ document.addEventListener("visibilitychange", function() {
+        if (audio && audio.src && audio.src !== "") {
+            if (document.hidden) {
+                audio._fuePausadoPorSistema = !audio.paused;
+                audio.pause();
+            } else {
+                if (audio._fuePausadoPorSistema) {
+                    audio.play().catch(function(e) { console.log("Bloqueo de hardware evitado"); });
+                }
+            }
+        }
+    });
 </script>
 
 
