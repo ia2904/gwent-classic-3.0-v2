@@ -3055,8 +3055,8 @@ let startPvPGameBtn = document.getElementById("start-pvp-game");
 				.card-array .card-large-quote {
 					top: 82% !important;
 					font-size: 11px !important;
-					line-height: 0.9 !important;
-					transform: scale(0.49) !important;
+					line-height: 0.85 !important;
+					transform: scale(0.47) !important;
 					transform-origin: top center !important;
 					width: 180% !important;
 					left: -40% !important;
@@ -3101,13 +3101,14 @@ let startPvPGameBtn = document.getElementById("start-pvp-game");
 				#carousel .card-description {
 					top: 71% !important;
                                         font-size: 11px !important;
-					line-height: 0.9 !important;
-					transform: scale(0.84) !important;
+					line-height: 0.83 !important;
+					transform: scale(0.82) !important;
 					transform-origin: top center !important;
 					}
 #button_start {
        margin-top: -43px !important;
 }
+
 #end-screen button {
     margin: -6.5% 1% 0;
     }
@@ -4466,7 +4467,7 @@ class DeckMaker {
                 alertaTablero.style.textAlign = "center";
                 alertaTablero.style.zIndex = "999999";
                 alertaTablero.style.boxShadow = "0 0 15px #000";
-                alertaTablero.innerHTML = "<b>Deck copied to clipboard!</b><br><br>Paste it into your notepad app to save it.";
+                alertaTablero.innerHTML = "<b>Deck copied to clipboard!</b><br><br>Paste into any notepad app and save as a .json file.";
                 
                 document.body.appendChild(alertaTablero);
                 setTimeout(() => { alertaTablero.remove(); }, 3000);
