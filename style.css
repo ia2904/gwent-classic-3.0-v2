@@ -70,10 +70,8 @@ div.abs {
     justify-content: center;
     text-align: center;
     font-weight: bold;
-    border: none; /* Asegúrate de que esto siga aquí */
-    
-    /* Con esta línea controlas todo el movimiento */
-    transform: translate(-10px, 90px);
+    border: none;  
+    transform: translate(-10px, 72px);
 }
 
 ::selection {
@@ -2165,9 +2163,18 @@ border-radius: 0.5vw;
     transition: all 0.1s ease-in-out;
 }
 
-/* --- ANIMACIÓN CINEMÁTICA DEFINITIVA: CLEAR WEATHER (RAYOS DE SOL) --- */
 
-/* Contenedor principal para el efecto del clima */
+.card-lg, 
+.card-lg *,
+#board-preview,
+#internal-deck-popup {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
+
 .sunlight-overlay-cinema {
     position: fixed !important;
     top: 0 !important;
