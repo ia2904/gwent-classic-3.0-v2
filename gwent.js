@@ -4131,34 +4131,34 @@ class DeckMaker {
 	}
 
 	// Creates HTML elements for the card previews
-	makePreview(index, num, container_elem, cards) {
-		let card_data = card_dict[index];
-
-		let elem = document.createElement("div");
-		elem.classList.add("card-lg");
-		elem = getPreviewElem(elem, card_data, num);
-		container_elem.appendChild(elem);
-
-		let bankID = {
-			index: index,
-			count: num,
-			elem: elem
-		};
-		let isBank = cards === this.bank;
-		cards.push(bankID);
-		let cardIndex = cards.length - 1;
-		elem.addEventListener("dblclick", () => this.select(cardIndex, isBank), false);
-		elem.addEventListener("mouseover", () => {
-			var aux = this;
-			carta_selecionada = function() {
-				aux.select(cardIndex, isBank);
-			}
-		}, false);
-		window.addEventListener("keydown", function (e) {
-			if (e.keyCode == 13 && carta_selecionada !== null) carta_selecionada();
-		});
-
- let touchTimeout = null;
+makePreview(index, num, container_elem, cards) {
+        let card_data = card_dict[index];
+ 
+        let elem = document.createElement("div");
+        elem.classList.add("card-lg");
+        elem = getPreviewElem(elem, card_data, num);
+        container_elem.appendChild(elem);
+ 
+        let bankID = {
+            index: index,
+            count: num,
+            elem: elem
+        };
+        let isBank = cards === this.bank;
+        cards.push(bankID);
+        let cardIndex = cards.length - 1;
+        elem.addEventListener("dblclick", () => this.select(cardIndex, isBank), false);
+        elem.addEventListener("mouseover", () => {
+            var aux = this;
+            carta_selecionada = function () {
+                aux.select(cardIndex, isBank);
+            }
+        }, false);
+        window.addEventListener("keydown", function (e) {
+            if (e.keyCode == 13 && carta_selecionada !== null) carta_selecionada();
+        });
+        
+        let touchTimeout = null;
         let touchMoved = false;
 
         elem.addEventListener("touchstart", (e) => {
@@ -4167,7 +4167,6 @@ class DeckMaker {
 
             touchTimeout = setTimeout(async () => {
                 if (!touchMoved) {
-                    if (typeof tocar === "function") tocar("explaining", false);
                     let container = new CardContainer();
                     container.cards = [new Card(index, card_data, null)];
                     try {
@@ -4175,7 +4174,7 @@ class DeckMaker {
                     } catch (err) { }
                     await ui.viewCardsInContainer(container);
                 }
-            }, 600); 
+            }, 500); 
         }, { passive: true });
 
         elem.addEventListener("touchmove", () => {
@@ -4191,20 +4190,24 @@ class DeckMaker {
             if (touchTimeout) clearTimeout(touchTimeout);
         }, { passive: true });
 
+        elem.addEventListener('contextmenu', async (e) => {
+            e.preventDefault(); 
+                    
+            if (typeof isMobile === "function" && isMobile()) {
+                return false;
+            }
+                        
+            let container = new CardContainer();
+            container.cards = [new Card(index, card_data, null)];
+            try {
+                Carousel.curr.cancel();
+            } catch (err) { }
+            await ui.viewCardsInContainer(container);
+        }, false);
+ 
+        return bankID;
+    }
 
-		// Right click allows to see more details about the selected card
-		elem.addEventListener('contextmenu', async (e) => {
-			e.preventDefault();
-			let container = new CardContainer();
-			container.cards = [new Card(index, card_data, null)];
-			try {
-				Carousel.curr.cancel();
-			} catch (err) { }
-			await ui.viewCardsInContainer(container);
-		}, false);
-
-		return bankID;
-	}
 
 	// Updates the card preview elements when any changes are made to the deck
 	update() {
