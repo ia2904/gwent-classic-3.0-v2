@@ -2755,7 +2755,7 @@ if (name === "hero") {
 
 	// Returns true if card is sent to a Row's special slot
 	isSpecial() {
-		return ["spe_horn", "spe_mardroeme", "spe_sign_quen", "spe_sign_yrden", "spe_toussaint_wine", "spe_lyria_rivia_morale", "spe_wyvern_shield", "spe_mantlet", "spe_garrison", "spe_dimeritium_shackles"].includes(this.key);
+		return ["spe_horn", "spe_mardroeme", "spe_sign_quen", "spe_sign_yrden", "spe_toussaint_wine", "spe_lyria_rivia_morale", "spe_wyvern_shield", "spe_mantlet", "spe_garrison", "spe_watchman", "spe_dimeritium_shackles"].includes(this.key);
 	}
 
 	// Compares by type then power then name
@@ -4174,7 +4174,7 @@ makePreview(index, num, container_elem, cards) {
                     } catch (err) { }
                     await ui.viewCardsInContainer(container);
                 }
-            }, 500); 
+            }, 400); 
         }, { passive: true });
 
         elem.addEventListener("touchmove", () => {
